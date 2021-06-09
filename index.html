@@ -78,19 +78,19 @@
                     break;
                 }
                 case '2': {
-                    url = link[0].replace(/XXX|XX/g, function (s) {
+                    url = link[0].replace(/XXX|ID|XX/g, function (s) {
                         return s == "XX" ? "iphone" : s == "ID" ? url : "@2x"
                     })
                     break;
                 }
                 case '3': {
-                    url = link[1].replace(/XXX|XX/g, function (s) {
+                    url = link[1].replace(/XXX|ID|XX/g, function (s) {
                         return s == "XX" ? "android" : s == "ID" ? url : ""
                     })
                     break;
                 }
                 case '4': {
-                    url = link[1].replace(/XXX|XX/g, function (s) {
+                    url = link[1].replace(/XXX|ID|XX/g, function (s) {
                         return s == "XX" ? "iphone" : s == "ID" ? url : "@2x"
                     })
                     break;
