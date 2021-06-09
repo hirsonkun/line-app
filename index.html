@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Stiker Line</title>
+</head>
+<style>
+    a:link,
+    a:visited {
+        background-color: hsl(234, 95%, 62%);
+        color: white;
+        padding: 14px 25px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    a:hover,
+    a:active {
+        background-color: hsl(234, 95%, 66%);
+    }
+</style>
+
+<body>
+    <a id="wangy" onclick="wangy()" href="#">Secret :D</a>
+    <center id="root"> <!-- Auto inject script here --> </center>
+</body>
+
+</html>
+<script src="script.js"></script>
+<script>
+    let isW = false
+    const defaultPage = `
+    <h2><code>Download stiker line dengan mudah.</code></h2>
+        <input type="text" oninput="download()" id="link_stiker" placeholder="Masukkan link url line atau id stiker"
+            size="100">
+        <p>Pilihan download (default: sticker versi android)</p>
+        <input type="radio" id="a" name="pil" value="1" onchange="download()">
+        <label for="a">Sticker versi android (Hemat)</label>
+        <input type="radio" id="b" name="pil" value="2" onchange="download()">
+        <label for="b">Sticker versi iphone (HD)</label>
+        <input type="radio" id="c" name="pil" value="3" onchange="download()">
+        <label for="c">Sticker animasi versi android (Hemat)</label>
+        <input type="radio" id="d" name="pil" value="4" onchange="download()">
+        <label for="d">Sticker animasi versi iphone (HD)</label>
+        <input type="radio" id="e" name="pil" value="5" onchange="download()">
+        <label for="e">Tema Line</label><br>
+        <p id="link_download"></p>
+        <div style="margin-top: 20px;">
+            <span>https://store.line.me/stickershop/product/9891285/id?from=sticker</span> <br>
+            <span> 9891285 <- ini adalah id stikernya</span>
+        </div>
+    `
+    document.getElementById('root').innerHTML = defaultPage
+    const link = ['http://dl.stickershop.line.naver.jp/products/0/0/1/ID/XX/stickersXXX.zip',
+        'http://dl.stickershop.line.naver.jp/products/0/0/1/ID/XX/stickerpackXXX.zip',
+        'http://dl.shop.line.naver.jp/themeshop/v1/products/ad/63/e5/ID/1/ANDROID/theme.zip']
+    function download() {
+        "use strict"
+        let url = document.getElementById("link_stiker").value, pil = document.getElementsByName('pil')
+        url = /-/.test(url) ? url : parseInt(url?.replace(/\D/g, ''))
+        for (let i = 0, len = pil.length; i < len; i++) {
+            if (pil[i].checked) {
+                pil = pil[i].value
+                break;
+            }
+        }
+        if (url) {
+            let str = "Stiker"
+            switch (pil) {
+                case '1': {
+                    url = link[0].replace(/XXX|ID|XX/g, function (s) {
+                        return s == "XX" ? "android" : s == "ID" ? url : ""
+                    })
+                    break;
+                }
+                case '2': {
+                    url = link[0].replace(/XXX|XX/g, function (s) {
+                        return s == "XX" ? "iphone" : s == "ID" ? url : "@2x"
+                    })
+                    break;
+                }
+                case '3': {
+                    url = link[1].replace(/XXX|XX/g, function (s) {
+                        return s == "XX" ? "android" : s == "ID" ? url : ""
+                    })
+                    break;
+                }
+                case '4': {
+                    url = link[1].replace(/XXX|XX/g, function (s) {
+                        return s == "XX" ? "iphone" : s == "ID" ? url : "@2x"
+                    })
+                    break;
+                }
+                case '5': {
+                    url = document.getElementById("link_stiker").value
+                    url = url.split('product/')[1]
+                    url = url?.split('/')[0]
+                    if (url) url = link[2].replace(/ID/, url)
+                    str = "Tema"
+                    break;
+                }
+                default: {
+                    url = document.getElementById("link_stiker").value
+                    url = url.split('product/')
+                    url = url[1] ? url[1].split('/')[0] : url[0]
+                    if (/-/.test(url)) {
+                        url = link[2].replace(/ID/, url)
+                        str = "Tema"
+                    } else url = link[0].replace(/XXX|ID|XX/g, function (s) {
+                        return s == "XX" ? "android" : s == "ID" ? url : ""
+                    })
+                    break;
+                }
+            }
+            document.getElementById('link_download').innerHTML = `<a href="${url}" target="_blank">Download ${str}</a>`
+        } else document.getElementById('link_download').innerHTML = "<p>Invalid Link</p>"
+    }
+    function wangy() {
+        console.log(document.getElementById('wangy').value)
+        if (isW) {
+            document.getElementById('wangy').text = "Secret :D"
+            document.getElementById('root').innerHTML = defaultPage
+            isW = false
+        } else {
+            document.getElementById('wangy').text = "kembali ke halaman utama"
+            document.getElementById('root').innerHTML = `
+        <u><h2><code>.:: TEMPLATE WANGY ::.</code></h2></u>
+        <input type="text" id="waifu" placeholder="Masukkan nama anda" oninput="generate()">
+        <div style="margin-top: 20px;">
+        <input type="radio" id="a" name="jenis" value="a" onchange="generate()">
+        <label for="a">Template 1</label>
+        <input type="radio" id="b" name="jenis" value="b" onchange="generate()">
+        <label for="b">Template 2</label>
+        <input type="radio" id="c" name="jenis" value="c" onchange="generate()">
+        <label for="c">Template 3</label>
+        <input type="radio" id="d" name="jenis" value="d" onchange="generate()">
+        <label for="d">Template 4</label>
+        <input type="radio" id="e" name="jenis" value="e" onchange="generate()">
+        <label for="e">Template 5</label>
+        <input type="radio" id="f" name="jenis" value="f" onchange="generate()">
+        <label for="f">Template 6</label>
+        <input type="radio" id="g" name="jenis" value="g" onchange="generate()">
+        <label for="g">Template 7</label><br><br>
+        <p>Klik kolom dibawah untuk copy text nya</p>
+        <textarea id="hasil" rows="15" cols="100" onclick="copyText()"></textarea>
+        <p id="copied"></p>
+        </div>`
+            isW = true
+        }
+    }
+</script>
