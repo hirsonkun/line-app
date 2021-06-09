@@ -48,7 +48,7 @@ function generate() {
             /* source nya lupa dari siapa XD */
             break;
     }
-    wangyEl.innerHTML = nama_waifu ? waifu : "Tulis nama kamu"
+    wangyEl.innerHTML = nama_waifu ? waifu : "Tulis nama waifu kamu"
 }
 function copyText() {
     var copyText = document.getElementById("hasil");
