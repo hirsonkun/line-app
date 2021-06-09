@@ -6,14 +6,14 @@ function generate() {
     const inputEl = document.getElementById("waifu");
     const jenisEl = document.getElementsByName("jenis");
     let jenis = ""
+    let nama_waifu = inputEl.value;
+    let waifu = null
     for (let i = 0, len = jenisEl.length; i < len; i++) {
         if (jenisEl[i].checked) {
             jenis = jenisEl[i].value
             break;
         }
     }
-    let nama_waifu = inputEl.value;
-    let waifu = null
     switch (jenis.toLowerCase()) {
         case 'a': {
             waifu = `${nama_waifu} ${nama_waifu} ${nama_waifu}  ❤️ ❤️ ❤️ WANGI WANGI WANGI WANGI HU HA HU HA HU HA, aaaah baunya rambut ${nama_waifu} wangi aku mau nyiumin aroma wanginya ${nama_waifu} AAAAAAAAH ~ Rambutnya.... aaah rambutnya juga pengen aku elus-elus ~~ AAAAAH ${nama_waifu} keluar pertama kali di anime juga manis ❤️ ❤️ ❤️ banget AAAAAAAAH ${nama_waifu} AAAAA LUCCUUUUUUUUUUUUUUU............${nama_waifu} AAAAAAAAAAAAAAAAAAAAGH ❤️ ❤️ ❤️apa ? ${nama_waifu} itu gak nyata ? Cuma HALU katamu ? nggak, ngak ngak ngak ngak NGAAAAAAAAK GUA GAK PERCAYA ITU DIA NYATA NGAAAAAAAAAAAAAAAAAK PEDULI BANGSAAAAAT !! GUA GAK PEDULI SAMA KENYATAAN POKOKNYA GAK PEDULI. ❤️ ❤️ ❤️ ${nama_waifu} gw ...${nama_waifu} di laptop ngeliatin gw, ${nama_waifu} .. kamu percaya sama aku ? aaaaaaaaaaah syukur ${nama_waifu} aku gak mau merelakan ${nama_waifu} aaaaaah ❤️ ❤️ ❤️ YEAAAAAAAAAAAH GUA MASIH PUNYA ${nama_waifu} SENDIRI PUN NGGAK SAMA AAAAAAAAAAAAAAH`
@@ -48,7 +48,7 @@ function generate() {
             /* source nya lupa dari siapa XD */
             break;
     }
-    nama_waifu ? wangyEl.innerHTML = waifu : wangyEl.innerHTML = "Tulis nama kamu"
+    wangyEl.innerHTML = nama_waifu ? waifu : "Tulis nama kamu"
 }
 function copyText() {
     var copyText = document.getElementById("hasil");
