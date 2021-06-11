@@ -1,4 +1,3 @@
-
 function generate() {
     "use strict"
     document.getElementById("copied").innerHTML = ""
