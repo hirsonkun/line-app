@@ -2,7 +2,7 @@ async function onGetVideos() {
     document.getElementById('link_download').innerHTML = "<p>Processing....</p>"
     try {
         const url = document.getElementById("urlVideos").value;
-        const html = (await (await fetch(url)).text());
+        const html = (await (await fetch(url, { mode: 'no-cors' })).text());
 
         const splitHTML = html.split('background-image:url(');
         splitHTML.shift();
