@@ -1,5 +1,6 @@
 async function onGetVideos() {
-    document.getElementById('link_download').innerHTML = "<p>Processing....</p>"
+    "use strict";
+    document.getElementById('link_download').innerHTML = "<p>Processing....</p>";
     try {
         const url = "https://api.allorigins.win/raw?url=" + document.getElementById("urlVideos").value;
         const html = (await (await fetch(url)).text());
