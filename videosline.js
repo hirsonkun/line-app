@@ -1,8 +1,8 @@
 async function onGetVideos() {
     document.getElementById('link_download').innerHTML = "<p>Processing....</p>"
     try {
-        const url = document.getElementById("urlVideos").value;
-        const html = (await (await fetch(url, { mode: 'no-cors' })).text());
+        const url = "https://api.allorigins.win/raw?url=" + document.getElementById("urlVideos").value;
+        const html = (await (await fetch(url)).text());
 
         const splitHTML = html.split('background-image:url(');
         splitHTML.shift();
