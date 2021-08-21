@@ -7,7 +7,7 @@ async function onGetVideos() {
         const splitHTML = html.split('background-image:url(');
         splitHTML.shift();
         const hasil = splitHTML.map((e) => `<video width="320" height="240" controls><source src="${e.split('/L')[0]}" type="video/mp4"></video>`).join(' ').trim();
-        document.getElementById('link_download').innerHTML = hasil || '<p>Invalid Link!</>';
+        document.getElementById('link_download').innerHTML = hasil || '<p>Invalid Link!</p>';
     } catch (error) {
         document.getElementById('link_download').innerHTML = `<p>Error : ${error.message}</p>`;
     }
