@@ -2,8 +2,19 @@ async function onGetTimeline() {
     "use strict";
     document.getElementById('link_download').innerHTML = "<p>Processing....</p>";
     try {
-        const url = "https://api.allorigins.win/raw?url=" + encodeURIComponent(document.getElementById("urlTimeline").value);
-        const htmlString = (await (await fetch(url)).text());
+        //const url = "https://api.allorigins.win/raw?url=" + encodeURIComponent(document.getElementById("urlTimeline").value);
+        const enableCors = {
+			mode: "cors",
+			referrerPolicy: 'no-referrer',
+			headers: {
+				'Content-Type': 'text/html',
+				'Access-Control-Allow-Origin': "*",
+				'Access-Control-Allow-Methods': 'GET',
+				'Access-Control-Allow-Headers': "*",
+				'Access-Control-Allow-Credentials': true
+			}
+		}
+        const htmlString = (await (await fetch(document.getElementById("urlTimeline").value, enableCors)).text());
         const html = new DOMParser().parseFromString(htmlString, "text/html");
         const json = JSON.parse(html.getElementById("__NEXT_DATA__").textContent);
         const feeds = Object.values(json.props?.pageProps?.initialState?.api?.feeds || {});
