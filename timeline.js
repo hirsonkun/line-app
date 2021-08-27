@@ -8,7 +8,7 @@ async function onGetTimeline() {
             mode: 'cors',
             headers: {
                 'Content-Type': 'text/plain; charset=utf-8',
-                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Origin': 'https://hirsonkun.github.io',
                 'Access-Control-Allow-Methods': '*',
                 'Access-Control-Allow-Headers': '*',
                 'Access-Control-Allow-Credentials': true
