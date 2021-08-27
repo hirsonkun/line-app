@@ -2,7 +2,7 @@ async function onGetTimeline() {
     "use strict";
     document.getElementById('link_download').innerHTML = "<p>Processing....</p>";
     try {
-        const url = "https://api.allorigins.win/raw?url=" + document.getElementById("urlTimeline").value;
+        const url = "https://api.allorigins.win/raw?url=" + encodeURIComponent(document.getElementById("urlTimeline").value);
         const htmlString = (await (await fetch(url)).text());
         const html = new DOMParser().parseFromString(htmlString, "text/html");
         const json = JSON.parse(html.getElementById("__NEXT_DATA__").textContent);
