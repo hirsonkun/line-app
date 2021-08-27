@@ -7,7 +7,7 @@ async function onGetTimeline() {
         const enableCors = {
             mode: 'cors',
             headers: {
-                'Content-Type': 'text/html',
+                'Content-Type': 'text/plain; charset=utf-8',
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': '*',
                 'Access-Control-Allow-Headers': '*',
