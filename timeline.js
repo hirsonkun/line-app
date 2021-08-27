@@ -5,8 +5,7 @@ async function onGetTimeline() {
         //const url = "https://api.allorigins.win/raw?url=" + encodeURIComponent(document.getElementById("urlTimeline").value);
         const url = document.getElementById("urlTimeline").value?.trim();
         const enableCors = {
-            mode: 'no-cors',
-            referrerPolicy: 'no-referrer',
+            mode: 'cors',
             headers: {
                 'Content-Type': 'text/html',
                 'Access-Control-Allow-Origin': '*',
