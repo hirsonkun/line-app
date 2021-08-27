@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Stiker/Video Line</title>
+    <title>Download Stiker/Timeline Line</title>
 </head>
 <style>
     a:link,
@@ -33,11 +33,11 @@
 
 </html>
 <script src="stikerline.js"></script>
-<script src="videosline.js"></script>
+<script src="timeline.js"></script>
 <script src="script.js"></script>
 <script>
-    let isW = false, isVideos = false;
-    const defaultPage = `<a id="linevideos" onclick="onPageChanged(this.id)" href="javascript:;">Download Video Line</a><br>
+    let isW = false, isTimeline = false;
+    const defaultPage = `<a id="line" onclick="onPageChanged(this.id)" href="javascript:;">Download Timeline Line</a><br>
         <h2><code>Download stiker line dengan mudah.</code></h2>
         <input type="text" oninput="download()" id="link_stiker" placeholder="Masukkan link url line atau id stiker"
             size="100">
@@ -57,11 +57,11 @@
             <span>https://store.line.me/stickershop/product/9891285/id?from=sticker</span> <br>
             <span> 9891285 <- ini adalah id stikernya</span>
         </div>`,
-        videosPage = `<a id="linevideos" onclick="onPageChanged(this.id)" href="javascript:;">Download Sticker Line</a><br>
+        timelinePage = `<a id="line" onclick="onPageChanged(this.id)" href="javascript:;">Download Sticker Line</a><br>
         <h2><code>Download video line dengan mudah.</code></h2>
-        <p><input id="urlVideos" type="text" placeholder="Masukkan link url line"
+        <p><input id="urlTimeline" type="text" placeholder="Masukkan link url line"
             size="100"></p>
-        <a onclick="onGetVideos()" href="javascript:;">Ambil Video</a><br>
+        <a onclick="onGetTimeline()" href="javascript:;">Ambil Media</a><br>
         <p id="link_download"></p>
         <div style="margin-top: 20px;">
             <span>ex : https://timeline.line.me/post/1162777602901016295</span> <br>
@@ -95,16 +95,16 @@
             case 'wangy':
                 if (isW) {
                     document.getElementById('wangy').text = "Secret :D";
-                    document.getElementById('root').innerHTML = isVideos ? videosPage : defaultPage;
+                    document.getElementById('root').innerHTML = isTimeline ? timelinePage : defaultPage;
                 } else {
                     document.getElementById('wangy').text = "kembali ke halaman utama";
                     document.getElementById('root').innerHTML = secretPage;
                 }
                 isW = !isW;
                 break;
-            case 'linevideos':
-                document.getElementById('root').innerHTML = isVideos ? defaultPage : videosPage;
-                isVideos = !isVideos;
+            case 'line':
+                document.getElementById('root').innerHTML = isTimeline ? defaultPage : timelinePage;
+                isTimeline = !isTimeline;
                 break;
             default:
                 document.getElementById('root').innerHTML = defaultPage;
