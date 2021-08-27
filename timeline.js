@@ -1,6 +1,6 @@
 async function onGetTimeline() {
     "use strict";
-    document.getElementById('link_download').innerHTML = "<p>Processing....</p>";
+    document.getElementById('link_download').innerHTML = "<p>Fetch ${url}...</p>";
     try {
         //const url = "https://api.allorigins.win/raw?url=" + encodeURIComponent(document.getElementById("urlTimeline").value);
         const url = document.getElementById("urlTimeline").value?.trim();
@@ -15,7 +15,6 @@ async function onGetTimeline() {
                 'Access-Control-Allow-Credentials': true
             }
         };
-        document.getElementById('link_download').innerHTML = `<p>Fetch ${url}...</p>`;
         const htmlString = (await (await fetch(url, enableCors)).text());
         const html = new DOMParser().parseFromString(htmlString, "text/html");
         document.getElementById('link_download').innerHTML = `<p>Extract JSON from ${url}</p>`;
