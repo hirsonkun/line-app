@@ -8,9 +8,9 @@ async function onGetTimeline() {
             mode: 'cors',
             referrerPolicy: 'no-referrer',
             headers: {
-                'Content-Type': 'text/html',
+                'Content-Type': 'text/plain',
                 'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET',
+                'Access-Control-Allow-Methods': '*',
                 'Access-Control-Allow-Headers': '*',
                 'Access-Control-Allow-Credentials': true
             }
