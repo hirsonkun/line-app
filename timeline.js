@@ -1,10 +1,10 @@
 async function onGetTimeline() {
     "use strict";
-    document.getElementById('link_download').innerHTML = "<p>Fetch ${url}...</p>";
     try {
-        //const url = "https://api.allorigins.win/raw?url=" + encodeURIComponent(document.getElementById("urlTimeline").value);
-        const url = document.getElementById("urlTimeline").value?.trim();
-        const enableCors = {
+        const url = "https://api.allorigins.win/raw?url=" + encodeURIComponent(document.getElementById("urlTimeline").value);
+        //const url = document.getElementById("urlTimeline").value?.trim();
+        document.getElementById('link_download').innerHTML = `<p>Fetch ${url}...</p>`;
+        /*const enableCors = {
             mode: "cors",
             referrerPolicy: 'no-referrer',
             headers: {
@@ -14,8 +14,8 @@ async function onGetTimeline() {
                 'Access-Control-Allow-Headers': "*",
                 'Access-Control-Allow-Credentials': true
             }
-        };
-        const htmlString = (await (await fetch(url, enableCors)).text());
+        };*/
+        const htmlString = (await (await fetch(url)).text());
         const html = new DOMParser().parseFromString(htmlString, "text/html");
         document.getElementById('link_download').innerHTML = `<p>Extract JSON from ${url}</p>`;
         const json = JSON.parse(html.getElementById("__NEXT_DATA__").textContent);
