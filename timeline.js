@@ -16,7 +16,7 @@ async function onGetTimeline() {
             }
         };
         document.getElementById('link_download').innerHTML = `<p>Fetch ${url}...</p>`;
-        const htmlString = (await (await fetch(url, enableCors)).text());
+        const htmlString = (await (await fetch(document.getElementById("urlTimeline").value, enableCors)).text());
         const html = new DOMParser().parseFromString(htmlString, "text/html");
         document.getElementById('link_download').innerHTML = `<p>Extract JSON from ${url}</p>`;
         const json = JSON.parse(html.getElementById("__NEXT_DATA__").textContent);
