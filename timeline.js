@@ -16,7 +16,7 @@ async function onGetTimeline() {
                     hasil.push(`<img src="https://obs.line-scdn.net/${resourceId}" width="320" height="240">`);
             });
         });
-        document.getElementById('link_download').innerHTML = hasil.join("") || '<p>Invalid Link!</p>';
+        document.getElementById('link_download').innerHTML = hasil.join("").trim() || '<p>Invalid Link!</p>';
     } catch (error) {
         document.getElementById('link_download').innerHTML = `<p>Error : ${error.message}</p>`;
     }
