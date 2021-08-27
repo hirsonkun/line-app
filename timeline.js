@@ -7,7 +7,7 @@ async function onGetTimeline() {
         const enableCors = {
             mode: 'cors',
             headers: {
-                'Content-Type': 'text/plain; charset=utf-8',
+                'Content-Type': 'text/html; charset=UTF-8',
                 'Access-Control-Allow-Origin': 'https://hirsonkun.github.io',
                 'Access-Control-Allow-Methods': '*',
                 'Access-Control-Allow-Headers': '*',
