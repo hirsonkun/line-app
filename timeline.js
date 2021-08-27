@@ -2,8 +2,8 @@ async function onGetTimeline() {
     "use strict";
     document.getElementById('link_download').innerHTML = "<p>Processing....</p>";
     try {
-        //const url = "https://api.allorigins.win/raw?url=" + encodeURIComponent(document.getElementById("urlTimeline").value);
-        const url = document.getElementById("urlTimeline").value?.trim();
+        const url = "https://api.allorigins.win/raw?url=" + encodeURIComponent(document.getElementById("urlTimeline").value);
+        //const url = document.getElementById("urlTimeline").value?.trim();
         const enableCors = {
             mode: 'cors',
             headers: {
