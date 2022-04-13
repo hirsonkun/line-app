@@ -27,8 +27,10 @@ function getIDStiker(url = "") {
  */
 async function getFile(url = "", filename = "") {
   try {
-    const blob = await (await fetch(url)).blob();
-    const data = URL.createObjectURL(blob);
+    const baseURL = "https://apiorigins.herokuapp.com/file?url=" + encodeURIComponent(url);
+    const resp = await fetch(baseURL);
+    const blob = await resp.arrayBuffer();
+    const data = URL.createObjectURL(new Blob([blob], { type: resp.headers.get("Content-Type") }));
     let downloadFilename = filename + "-" + Math.floor(Date.now() / 1000);
     return `<a href="${data}" download="${downloadFilename}">Download ${filename}</a>`;
   } catch (error) {
