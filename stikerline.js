@@ -13,10 +13,10 @@ function getIDStiker(url = "") {
   if (/:\/\//.test(url)) {
     url = url.split("://")[1];
   }
-  if (url.indexOf("sticker") !== -1) {
-    return url.replace(/[^0-9]/g, "");
+  if (url.indexOf("theme") !== -1) {
+    return url.split("/").filter((search) => search.indexOf("-") !== -1);
   }
-  return url.split("/").filter((search) => search.indexOf("-") !== -1);
+  return url.replace(/[^0-9]/g, "");
 }
 /**
  * Mengatasi tidak dapat download file menggunakan href.
@@ -107,7 +107,7 @@ function download() {
         break;
       }
     }
-    const createEl = `<a onclick="getFile()" data-src="${url}" data-filename="${str}" id="downloadFile" href="javascript:;">Download ${str}</a>`;
-    document.getElementById("link_download").innerHTML = createEl;
+    const link = `<a onclick="getFile()" data-src="${url}" data-filename="${str}" id="downloadFile">Download ${str}</a>`;
+    document.getElementById("link_download").innerHTML = link;
   } else document.getElementById("response").innerHTML = "<p>Invalid Link</p>";
 }
