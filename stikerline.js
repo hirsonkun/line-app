@@ -107,7 +107,7 @@ function download() {
         break;
       }
     }
-    const link = `<a onclick="getFile()" data-src="${url}" data-filename="${str}" id="downloadFile">Download ${str}</a>`;
-    document.getElementById("link_download").innerHTML = link;
+    const createEl = `<a onclick="getFile()" data-src="${url}" data-filename="${str}" id="downloadFile" href="javascript:;">Download ${str}</a>`;
+    document.getElementById("link_download").innerHTML = createEl;
   } else document.getElementById("response").innerHTML = "<p>Invalid Link</p>";
 }
