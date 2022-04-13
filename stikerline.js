@@ -42,7 +42,7 @@ async function getFile() {
       el.download = downloadFilename;
       document.body.appendChild(el);
       el.click();
-      window.URL.revokeObjectURL(url);
+      window.URL.revokeObjectURL(data);
       document.body.removeChild(el);
       el.remove();
       document.getElementById("response").innerHTML = "";
