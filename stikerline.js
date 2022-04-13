@@ -25,19 +25,34 @@ function getIDStiker(url = "") {
  * @param {String} filename - Nama file
  * @returns {Promise<String>} Mengembalikan nilai berupa raw html
  */
-async function getFile(url = "", filename = "") {
+async function getFile() {
+  document.getElementById("response").innerHTML = "<p>Processing...!</p>";
   try {
-    const baseURL = "https://apiorigins.herokuapp.com/file?url=" + encodeURIComponent(url);
+    const atr = document.getElementById("downloadFile");
+    const baseURL = "https://apiorigins.herokuapp.com/file?url=" + encodeURIComponent(atr.getAttribute("data-src"));
     const resp = await fetch(baseURL);
     const blob = await resp.arrayBuffer();
+    const type = resp.headers.get("Content-Type");
+    if (type.indexOf("json")) {
+      throw Error("Invalid Link");
+    }
     const data = URL.createObjectURL(new Blob([blob], { type: resp.headers.get("Content-Type") }));
-    let downloadFilename = filename + "-" + Math.floor(Date.now() / 1000);
-    return `<a href="${data}" download="${downloadFilename}">Download ${filename}</a>`;
+    let downloadFilename = atr.getAttribute("data-filename") + "-" + Math.floor(Date.now() / 1000);
+    const el = document.createElement("a");
+    el.style.cssText = "display: none;";
+    el.href = data;
+    el.download = downloadFilename;
+    document.body.appendChild(el);
+    el.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(el);
+    el.remove();
+    document.getElementById("response").innerHTML = "";
   } catch (error) {
-    return "<p>" + error.message + "</p>";
+    document.getElementById("response").innerHTML = "<p>" + error.message + "</p>";
   }
 }
-async function download() {
+function download() {
   let url = document.getElementById("link_stiker").value,
     pil = document.getElementsByName("pil");
   url = getIDStiker(url);
@@ -92,6 +107,7 @@ async function download() {
         break;
       }
     }
-    document.getElementById("link_download").innerHTML = await getFile(url, str);
-  } else document.getElementById("link_download").innerHTML = "<p>Invalid Link</p>";
+    const link = `<a onclick="getFile()" data-src="${url}" data-filename="${str}" id="downloadFile">Download ${str}</a>`;
+    document.getElementById("link_download").innerHTML = link;
+  } else document.getElementById("response").innerHTML = "<p>Invalid Link</p>";
 }
