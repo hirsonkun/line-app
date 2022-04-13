@@ -31,23 +31,23 @@ async function getFile() {
     const atr = document.getElementById("downloadFile");
     const baseURL = "https://apiorigins.herokuapp.com/file?url=" + encodeURIComponent(atr.getAttribute("data-src"));
     const resp = await fetch(baseURL);
-    const blob = await resp.arrayBuffer();
-    const type = resp.headers.get("Content-Type");
-    if (type.indexOf("json")) {
-      throw Error("Invalid Link");
+    if (resp.ok) {
+      const createZip = "data:application/zip;base64," + (await resp.text());
+      const createBuffer = await (await fetch(createZip)).arrayBuffer();
+      const data = URL.createObjectURL(new Blob([createBuffer], { type: "application/zip" }));
+      let downloadFilename = atr.getAttribute("data-filename") + "-" + Math.floor(Date.now() / 1000);
+      const el = document.createElement("a");
+      el.style.cssText = "display: none;";
+      el.href = data;
+      el.download = downloadFilename;
+      document.body.appendChild(el);
+      el.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(el);
+      el.remove();
+      document.getElementById("response").innerHTML = "";
     }
-    const data = URL.createObjectURL(new Blob([blob], { type: resp.headers.get("Content-Type") }));
-    let downloadFilename = atr.getAttribute("data-filename") + "-" + Math.floor(Date.now() / 1000);
-    const el = document.createElement("a");
-    el.style.cssText = "display: none;";
-    el.href = data;
-    el.download = downloadFilename;
-    document.body.appendChild(el);
-    el.click();
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(el);
-    el.remove();
-    document.getElementById("response").innerHTML = "";
+    document.getElementById("response").innerHTML = resp.statusText;
   } catch (error) {
     document.getElementById("response").innerHTML = "<p>" + error.message + "</p>";
   }
@@ -107,7 +107,7 @@ function download() {
         break;
       }
     }
-    const link = `<a onclick="getFile()" data-src="${url}" data-filename="${str}" id="downloadFile">Download ${str}</a>`;
-    document.getElementById("link_download").innerHTML = link;
+    const createEl = `<a onclick="getFile()" data-src="${url}" data-filename="${str}" id="downloadFile" href="javascript:;">Download ${str}</a>`;
+    document.getElementById("link_download").innerHTML = createEl;
   } else document.getElementById("response").innerHTML = "<p>Invalid Link</p>";
 }
