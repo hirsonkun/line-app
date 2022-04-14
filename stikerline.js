@@ -14,7 +14,11 @@ function getIDStiker(url = "") {
     url = url.split("://")[1];
   }
   if (url.indexOf("theme") !== -1) {
-    return url.split("/").filter((search) => search.indexOf("-") !== -1);
+    return url
+      .split("/")
+      .filter((search) => search.indexOf("-") !== -1)
+      .toString()
+      .replace(/.*?\?=/, "");
   }
   return url.replace(/[^0-9]/g, "");
 }
@@ -27,15 +31,15 @@ function getIDStiker(url = "") {
  */
 async function getFile() {
   document.getElementById("response").innerHTML = "<p>Processing...!</p>";
+  let response = null;
   try {
     const atr = document.getElementById("downloadFile");
     const baseURL = "https://apiorigins.herokuapp.com/file?url=" + encodeURIComponent(atr.getAttribute("data-src"));
-    const resp = await fetch(baseURL);
-    const errMsg = resp.headers.get("X-Custom-Response");
-    if (resp.ok && !errMsg) {
-      const createZip = "data:application/zip;base64," + (await resp.text());
-      const createBuffer = await (await fetch(createZip)).arrayBuffer();
-      const data = URL.createObjectURL(new Blob([createBuffer], { type: "application/zip" }));
+    const request = await fetch(baseURL);
+    if (request.ok) {
+      response = await request.text();
+      const decode = window.atob(response);
+      const data = URL.createObjectURL(new Blob([decode], { type: "application/zip" }));
       let downloadFilename = atr.getAttribute("data-filename") + "-" + Math.floor(Date.now() / 1000);
       const el = document.createElement("a");
       el.style.cssText = "display: none;";
@@ -48,10 +52,10 @@ async function getFile() {
       el.remove();
       document.getElementById("response").innerHTML = "";
     } else {
-      document.getElementById("response").innerHTML = errMsg || "<p>Tidak dapat menemukan id stiker/tema.</p>";
+      document.getElementById("response").innerHTML = "<p>Tidak dapat menemukan id stiker/tema.</p>";
     }
-  } catch {
-    document.getElementById("response").innerHTML = "<p>Tidak dapat menemukan id stiker/tema.</p>";
+  } catch (err) {
+    document.getElementById("response").innerHTML = response || "<p>" + err.message + "</p>";
   }
 }
 function download() {
@@ -111,5 +115,9 @@ function download() {
     }
     const createEl = `<a onclick="getFile()" data-src="${url}" data-filename="${str}" id="downloadFile" href="javascript:;">Download ${str}</a>`;
     document.getElementById("link_download").innerHTML = createEl;
-  } else document.getElementById("response").innerHTML = "<p>Invalid Link</p>";
+    document.getElementById("response").innerHTML = "";
+  } else {
+    document.getElementById("response").innerHTML = "<p>Invalid Link</p>";
+    document.getElementById("link_download").innerHTML = "";
+  }
 }
