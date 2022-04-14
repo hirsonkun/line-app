@@ -31,7 +31,7 @@ async function getFile() {
     const atr = document.getElementById("downloadFile");
     const baseURL = "https://apiorigins.herokuapp.com/file?url=" + encodeURIComponent(atr.getAttribute("data-src"));
     const resp = await fetch(baseURL);
-    const errMsg = resp.headers.get("X-Custom-Response");
+    // const errMsg = resp.headers.get("X-Custom-Response");
     if (resp.ok && !errMsg) {
       const createZip = "data:application/zip;base64," + (await resp.text());
       const createBuffer = await (await fetch(createZip)).arrayBuffer();
@@ -48,9 +48,9 @@ async function getFile() {
       el.remove();
       document.getElementById("response").innerHTML = "";
     }
-    document.getElementById("response").innerHTML = errMsg;
-  } catch (error) {
-    document.getElementById("response").innerHTML = "<p>" + error.message + "</p>";
+    document.getElementById("response").innerHTML = "<p>Tidak dapat menemukan id stiker/tema.</p>";
+  } catch {
+    document.getElementById("response").innerHTML = "<p>Tidak dapat menemukan id stiker/tema.</p>";
   }
 }
 function download() {
