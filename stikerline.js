@@ -47,8 +47,9 @@ async function getFile() {
       document.body.removeChild(el);
       el.remove();
       document.getElementById("response").innerHTML = "";
+    } else {
+      document.getElementById("response").innerHTML = "<p>Tidak dapat menemukan id stiker/tema.</p>";
     }
-    document.getElementById("response").innerHTML = "<p>Tidak dapat menemukan id stiker/tema.</p>";
   } catch {
     document.getElementById("response").innerHTML = "<p>Tidak dapat menemukan id stiker/tema.</p>";
   }
