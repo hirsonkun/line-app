@@ -18,7 +18,7 @@ function getIDStiker(url = "") {
       .split("/")
       .filter((search) => search.indexOf("-") !== -1)
       .toString()
-      .replace(/.*?\?=/, "");
+      .replace(/(.*\?id=)|(&.*)/g, "");
   }
   return url.replace(/[^0-9]/g, "");
 }
