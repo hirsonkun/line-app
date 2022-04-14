@@ -38,8 +38,10 @@ async function getFile() {
     const request = await fetch(baseURL);
     if (request.ok) {
       response = await request.text();
-      const decode = window.atob(response);
-      const data = URL.createObjectURL(new Blob([decode], { type: "application/zip" }));
+      window.atob(response); // Hanya untuk memvalidasi response berformat base64 atau tidak
+      const createZip = "data:application/zip;base64," + response;
+      const createBuffer = await (await fetch(createZip)).arrayBuffer();
+      const data = URL.createObjectURL(new Blob([createBuffer], { type: "application/zip" }));
       let downloadFilename = atr.getAttribute("data-filename") + "-" + Math.floor(Date.now() / 1000);
       const el = document.createElement("a");
       el.style.cssText = "display: none;";
