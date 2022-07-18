@@ -27,7 +27,6 @@ function getIDStiker(url = "") {
  * Dan ubah file untuk mencegah penamaan file yang sama
  * @param {String} url - URL Stiker/Tema
  * @param {String} filename - Nama file
- * @returns {Promise<String>} Mengembalikan nilai berupa raw html
  */
 async function getFile() {
   document.getElementById("response").innerHTML = "<p>Processing...!</p>";
