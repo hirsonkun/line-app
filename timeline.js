@@ -3,18 +3,6 @@ async function onGetTimeline() {
     document.getElementById('link_download').innerHTML = "<p>Processing...</p>";
     try {
         const url = "https://apiorigins.vercel.app/?url=" + encodeURIComponent(document.getElementById("urlTimeline").value);
-        //const url = document.getElementById("urlTimeline").value?.trim();
-        /*const enableCors = {
-            mode: "cors",
-            referrerPolicy: 'no-referrer',
-            headers: {
-                'Content-Type': 'text/html',
-                'Access-Control-Allow-Origin': "*",
-                'Access-Control-Allow-Methods': 'GET',
-                'Access-Control-Allow-Headers': "*",
-                'Access-Control-Allow-Credentials': true
-            }
-        };*/
         const htmlString = (await (await fetch(url)).text());
         const html = new DOMParser().parseFromString(htmlString, "text/html");
         document.getElementById('link_download').innerHTML = `<p>Extract JSON from ${url}</p>`;
