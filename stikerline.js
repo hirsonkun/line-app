@@ -33,7 +33,7 @@ async function getFile() {
   let response = null;
   try {
     const atr = document.getElementById("downloadFile");
-    const baseURL = "https://apiorigins.herokuapp.com/file?url=" + encodeURIComponent(atr.getAttribute("data-src"));
+    const baseURL = "https://apiorigins.vercel.app/file?url=" + encodeURIComponent(atr.getAttribute("data-src"));
     const request = await fetch(baseURL);
     if (request.ok) {
       response = await request.text();
